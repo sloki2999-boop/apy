@@ -1,0 +1,447 @@
+1. Write a python program to catch following exception 
+(a) Value Error 
+(b) Index Error 
+(c) Name Error 
+(d) Type Error 
+(e) Divide Zero Error 
+ 
+def demo_exe(choice): 
+    try: 
+        if choice == 1: 
+            num = int(input("Enter a number: ")) 
+            square = num * num 
+            print(square) 
+        elif choice == 2: 
+            lst1 = [10, 30, 40] 
+            item = lst1[5] 
+            print(item) 
+        elif choice == 3: 
+            print(lst) 
+        elif choice == 4: 
+            sm = "num" + 4 
+            print(sm) 
+        elif choice == 5: 
+            num1 = int(input("Enter number 1: ")) 
+            num2 = int(input("Enter number 2: ")) 
+            res = num1 / num2 
+            print(res)  
+    except ValueError as ve: 
+        print("ValueError:", ve) 
+    except IndexError as e: 
+        print("IndexError:", e) 
+ except NameError as ne: 
+        print("NameError:", ne) 
+except TypeError as te: 
+print("TypeError:", te) 
+except ZeroDivisionError as ze: 
+print("ZeroDivisionError:", ze) 
+for i in range(1, 6): 
+print(f"\n----- TEST CASE {i} -----") 
+demo_exe(i) 
+
+Output: ----- TEST CASE 1 ----- 
+Enter a number: 5 
+25 ----- TEST CASE 2 ----- 
+IndexError: list index out of range ----- TEST CASE 3 ----- 
+NameError: name 'lst' is not defined ----- TEST CASE 4 ----- 
+TypeError: can only concatenate str (not "int") to str ----- TEST CASE 5 ----- 
+Enter number 1: 10 
+Enter number 2: 0 
+ZeroDivisionError: division by zero 
+
+
+2. Write a python program to create user defined exceptions. 
+class Error(Exception): 
+pass 
+class ValueTooSmallError(Error): 
+pass 
+class ValueTooLargeError(Error): 
+pass 
+number = 10 
+while True: 
+try: 
+i_num = int(input("Enter a number: ")) 
+if i_num < number: 
+raise ValueTooSmallError 
+elif i_num > number: 
+raise ValueTooLargeError 
+break 
+except ValueTooSmallError: 
+print("This value is too small, try again!") 
+print() 
+except ValueTooLargeError: 
+print("This value is too large, try again!") 
+print() 
+print("Congratulations! You guessed it correctly.") 
+
+Output: 
+Enter a number: 3 
+This value is too small, try again! 
+Enter a number: 7 
+This value is too small, try again! 
+Enter a number: 10 
+Congratulations! You guessed it correctly. 
+
+
+3. Write a python program to understand the use of else and finally 
+block with try block. 
+
+def divide(x, y): 
+try: 
+result = x // y 
+except ZeroDivisionError: 
+print("Sorry! You are dividing by zero") 
+else: 
+print("Yeah! Your answer is:", result) 
+finally: 
+print("This is always executed") 
+divide(3, 2) 
+divide(3, 0) 
+
+Output: 
+Yeah! Your answer is: 1 
+This is always executed 
+Sorry! You are dividing by zero 
+This is always executed 
+
+4. Write a python program that uses raise and exception class to 
+throw an exception. 
+
+class Error(Exception): 
+pass 
+class PasswordSmallError(Error): 
+pass 
+class PasswordLargeError(Error): 
+pass 
+try: 
+password = input("Enter a password: ") 
+if len(password) < 6: 
+raise PasswordSmallError("Password is short!") 
+if len(password) > 15: 
+raise PasswordLargeError("Password is long!") 
+print("Password is valid") 
+except PasswordSmallError as ps: 
+print(ps) 
+except PasswordLargeError as pl: 
+print(pl) 
+
+Output: 
+Enter a password: Deptcs@123 
+Password is valid 
+
+5. Create a numpy array from list, tuple with float type. 
+import numpy as np 
+
+list1 = [1.1, 2.2, 3.3] 
+print(type(list1)) 
+print(list1) 
+print() 
+array1 = np.array(list1) 
+print(type(array1)) 
+print(array1) 
+print() 
+tuple1 = (1.1, 2.2, 3.3) 
+print(type(tuple1)) 
+print(tuple1) 
+print() 
+array2 = np.array(tuple1) 
+print(type(array2)) 
+print(array2) 
+print() 
+array3 = np.array([tuple1, list1, array2]) 
+print(type(array3)) 
+print(array3)
+
+Output: 
+<class 'list'> 
+[1.1, 2.2, 3.3] 
+<class 'numpy.ndarray'> 
+[1.1 2.2 3.3] 
+<class 'tuple'> 
+(1.1, 2.2, 3.3) 
+<class 'numpy.ndarray'> 
+[1.1 2.2 3.3] 
+<class 'numpy.ndarray'> 
+[[1.1 2.2 3.3] 
+[1.1 2.2 3.3] 
+[1.1 2.2 3.3]] 
+
+6. Write a python program to find min, max, sum, cumulative sum 
+of array. 
+
+import numpy as np 
+a = np.array([1, 20, 5, 22, 8, 15]) 
+print("\n----- A Array -----") 
+print(a) 
+b = np.array([12, 9, 3, 42, 6, 33]) 
+print("\n----- B Array -----") 
+print(b) 
+print("\n----- Minimum Array -----") 
+print(np.minimum(a, b)) 
+print("\n----- Maximum Array -----") 
+print(np.maximum(a, b)) 
+print("\n----- Sum Array A -----") 
+print(np.sum(a)) 
+print("\n----- Sum Array B -----") 
+print(np.sum(b)) 
+def cumSum(s): 
+sm = 0 
+cum_list = [] 
+for i in s: 
+sm = sm + i 
+cum_list.append(sm) 
+return cum_list 
+print("\n----- Cumulative Sum of A -----") 
+print(cumSum(a)) 
+print("\n----- Cumulative Sum of B -----") 
+print(cumSum(b)) 
+
+Output: ----- A Array ----- 
+[ 1 20 5 22 8 15] ----- B Array ----- 
+[12 9 3 42 6 33] ----- Minimum Array ----- 
+[ 1 9 3 22 6 15] ----- Maximum Array ----- 
+[12 20 5 42 8 33] 
+----- Sum Array A ----- 
+71 ----- Sum Array B ----- 
+105 ----- Cumulative Sum of A ----- 
+[np.int64(1), np.int64(21), np.int64(26), np.int64(48), np.int64(56), np.int64(71)] ----- Cumulative Sum of B ----- 
+[np.int64(12), np.int64(21), np.int64(24), np.int64(66), np.int64(72), np.int64(105)] 
+
+7. Write a python program to demonstrate use of ndim, shape, size, 
+dtype. 
+
+import numpy as np 
+arr = np.array([[1, 2, 3], [4, 2, 5]]) 
+print("Array is of type: ", type(arr)) 
+print("No. of dimensions: ", arr.ndim) 
+print("Shape of array: ", arr.shape) 
+print("Size of array: ", arr.size) 
+print("Array stores elements of type: ", arr.dtype)
+
+Output: 
+Array is of type: <class 'numpy.ndarray'> 
+No. of dimensions: 2 
+Shape of array: (2, 3) 
+Size of array: 6 
+Array stores elements of type: int64 
+
+8. Write a python program to create two threads to keep a count of Number of even numbers 
+entered by the user. 
+
+import threading 
+import time 
+def even(numbers_list): 
+count = 0 
+for number in numbers_list: 
+if number % 2 == 0: 
+count += 1 
+time.sleep(1) 
+print("Even number:", number) 
+print("Count of even numbers:", count) 
+if __name__ == "__main__": 
+num1 = input("Please enter more than one number: ") 
+list1 = [int(i) for i in num1.split()] 
+num2 = input("Please enter more than one number: ") 
+list2 = [int(i) for i in num2.split()] 
+t1 = threading.Thread(target=even, args=(list1,)) 
+t2 = threading.Thread(target=even, args=(list2,)) 
+t1.start() 
+t2.start() 
+t1.join() 
+t2.join() 
+
+Output: 
+Please enter more than one number: 1 2 3 4 5 
+Please enter more than one number: 6 7 8 9 10 
+Even number: 2 
+Even number: 6 
+Even number: 4 
+Even number: 8 
+Even number: 10 
+Count of even numbers: 2 
+Count of even numbers: 3 
+
+9. Write a python program to find matrix and vector products (dot, 
+inner, outer, product), matrix exponentiation. 
+
+import numpy as np 
+x = np.array([1, 4, 0], float) 
+y = np.array([2, 2, 1], float) 
+print("Matrices and vectors.") 
+print("x:") 
+print(x) 
+print("y:") 
+print(y) 
+print("Dot product of x and y:") 
+print(np.dot(x, y)) 
+print("Inner product of x and y:") 
+print(np.inner(x, y)) 
+print("Outer product of x and y:") 
+print(np.outer(x, y)) 
+print("Cross product of x and y:") 
+print(np.cross(x, y)) 
+matrix = np.array([[1, 2], [4, 5]]) 
+print("Matrix:") 
+print(matrix) 
+power = np.linalg.matrix_power(matrix, 3) 
+print("Power of Matrix, 3:") 
+print(power)
+
+Ouput: 
+Matrices and vectors. 
+x: 
+[1. 4. 0.] 
+y: 
+[2. 2. 1.] 
+Dot product of x and y: 
+10.0 
+Inner product of x and y: 
+10.0 
+Outer product of x and y: 
+[[2. 2. 1.] 
+[8. 8. 4.] 
+[0. 0. 0.]] 
+Cross product of x and y: 
+[ 4. -1. -6.] 
+Matrix: 
+[[1 2] 
+[4 5]] 
+Power of Matrix, 3: 
+[[ 57  78] 
+[156 213]] 
+
+10. Perform Sorting, Searching and Counting using Numpy methods. 
+import numpy as np 
+
+arr = np.array([10, 5, 20, 5, 30, 10, 40]) 
+print("Original Array:", arr) 
+sorted_arr = np.sort(arr) 
+print("Sorted Array:", sorted_arr) 
+search_result = np.where(arr == 10) 
+print("Positions of 10:", search_result[0]) 
+count = np.count_nonzero(arr == 5) 
+print("Count of 5:", count) 
+total = arr.size 
+print("Total Number of Elements:", total) 
+
+Output: 
+Original Array: [10 5 20 5 30 10 40] 
+Sorted Array: [ 5 5 10 10 20 30 40] 
+Positions of 10: [0 5] 
+Count of 5: 2 
+Total Number of Elements: 7 
+
+11. Create a Pandas Series from a dictionary. 
+import pandas as pd 
+dict1 = {'Auth_Name': pd.Series( ['Jitender', 'Purnima', 'Arpit', 'Jyoti'], 
+index=['SNo1', 'SN02', 'SN03', 'SN04']), 
+'Author_Book_No': pd.Series( 
+[210, 211, 114, 178], 
+index=['SNo1', 'SN02', 'SN03', 'SN04']), 
+'Age': pd.Series( 
+[21, 21, 24, 23], 
+index=['SNo1', 'SN02', 'SN03', 'SN04'])} 
+df = pd.DataFrame(dict1, index=['SNo1', 'SN02', 'SN03', 'SN04']) 
+print(df) 
+
+Output: 
+Auth_Name Author_Book_No Age 
+SNo1 Jitender 210 21 
+SN02 Purnima 211 21 
+SN03 Arpit 114 24 
+SN04 Jyoti 178 23 
+
+12. Create a Pandas Data Frame. 
+import pandas as pd 
+
+d = { 'one': pd.Series([1, 2, 3], index=['a', 'b', 'c']), 
+'two': pd.Series([1, 2, 3], index=['a', 'b', 'c'])} 
+df = pd.DataFrame(d) 
+print("Adding a new column:") 
+df['three'] = pd.Series([10, 20, 30], index=['a', 'b', 'c']) 
+print(df) 
+print("Adding a new column using the existing columns in DataFrame:") 
+df['four'] = df['one'] + df['three'] 
+print(df) 
+print("Deleting the first column using DEL function:") 
+del df['one'] 
+print(df) 
+
+Output: 
+Adding a new column: 
+one two three 
+a 1 1 10 
+b 2 2 20 
+c 3 3 30 
+Adding a new column using the existing columns in DataFrame: 
+one two three four 
+a 1 1 10 11 
+b 2 2 20 22 
+c 3 3 30 33 
+Deleting the first column using DEL function: 
+two three four 
+a 1 10 11 
+b 2 20 22 
+c 3 30 33 
+
+13. Create data frames from csv and excel files. 
+import pandas as pd 
+df1 = pd.read_csv("students.csv") 
+print("DataFrame from CSV:") 
+print(df1) 
+df2 = pd.read_excel("students.xlsx") 
+print("\nDataFrame from Excel:") 
+print(df2) 
+
+Output: 
+DataFrame from CSV: 
+Name Age Marks 
+0 Arun 20 85 
+1 Priya 21 92 
+2 Rahul 19 78 
+3 Anu 22 95 
+DataFrame from Excel: 
+Name Age Marks 
+0 Arun 20 85 
+1 Priya 21 92 
+2 Rahul 19 78 
+3 Anu 22 95 
+
+14. Write a Python class named Person with attributes name, age, 
+weight (kgs), height (ft) and takes them through the constructor 
+and exposes a method get_bmi_result() which returns one of 
+“underweight”, “healthy”, “obese” 
+
+class Person: 
+def __init__(self, name, age, weight, height): 
+self.name = name 
+self.age = age 
+self.weight = weight 
+self.height = height 
+    def get_bmi_result(self): 
+        height_m = self.height * 0.3048 
+        bmi = self.weight / (height_m * height_m) 
+        if bmi < 18.5: 
+            return "underweight" 
+        elif bmi < 25: 
+            return "healthy" 
+        else: 
+            return "obese" 
+name = input("Enter name: ") 
+age = int(input("Enter age: ")) 
+weight = float(input("Enter weight (kgs): ")) 
+height = float(input("Enter height (ft): ")) 
+p = Person(name, age, weight, height) 
+print("Name:", p.name) 
+print("Age:", p.age) 
+print("BMI Result:", p.get_bmi_result()) 
+ 
+Output:  
+Enter name: Arun 
+Enter age: 21 
+Enter weight (kgs): 60 
+Enter height (ft): 5.8 
+
+Name: Arun 
+Age: 21 
+BMI Result: healthy 
