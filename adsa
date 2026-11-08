@@ -1,0 +1,361 @@
+1. Quick Sort 
+import java.util.*; 
+class QuickSort { 
+static int partition(int a[], int l, int h) { 
+int p=a[h], i=l-1; 
+for(int j=l;j<h;j++) 
+if(a[j]<=p) { 
+i++; 
+int t=a[i]; a[i]=a[j]; a[j]=t; 
+} 
+int t=a[i+1]; a[i+1]=a[h]; a[h]=t; 
+return i+1; 
+} 
+static void quickSort(int a[], int l, int h) { 
+if(l<h) { 
+int p=partition(a,l,h); 
+quickSort(a,l,p-1); 
+quickSort(a,p+1,h); 
+}                                                                          
+} 
+public static void main(String[] args) { 
+int a[]={8,7,2,1,0,9,6}; 
+System.out.println("Unsorted: "+Arrays.toString(a)); 
+quickSort(a,0,a.length-1); 
+System.out.println("Sorted: "+Arrays.toString(a)); 
+} 
+} 
+
+Output: 
+Unsorted: [8, 7, 2, 1, 0, 9, 6] 
+Sorted: [0, 1, 2, 6, 7, 8, 9] 
+
+
+2. MergeSort 
+class MergeSort { 
+ 
+    void merge(int a[], int l, int m, int r) {                    
+        int temp[] = new int[r - l + 1]; 
+ 
+        int i = l, j = m + 1, k = 0; 
+ 
+        while (i <= m && j <= r) { 
+            if (a[i] < a[j]) 
+                temp[k++] = a[i++]; 
+            else 
+                temp[k++] = a[j++]; 
+        } 
+ 
+        while (i <= m) 
+            temp[k++] = a[i++]; 
+ 
+        while (j <= r) 
+            temp[k++] = a[j++]; 
+ 
+        for (i = 0; i < temp.length; i++) 
+            a[l + i] = temp[i]; 
+    } 
+ 
+    void sort(int a[], int l, int r) { 
+        if (l < r) { 
+            int m = (l + r) / 2; 
+ 
+            sort(a, l, m); 
+            sort(a, m + 1, r); 
+ 
+            merge(a, l, m, r); 
+        } 
+    } 
+    public static void main(String args[]) { 
+ 
+        int a[] = {6, 5, 12, 10, 9, 1}; 
+ 
+        MergeSort obj = new MergeSort(); 
+ 
+        obj.sort(a, 0, a.length - 1); 
+ 
+        System.out.println("Sorted Array:"); 
+ 
+        for (int i = 0; i < a.length; i++) 
+            System.out.print(a[i] + " "); 
+    } 
+}    
+
+Output Sorted Array:  1 5 6 9 10 12 
+ 
+ 
+ 
+3. ShellSort 
+ 
+class ShellSort { 
+    public static void main(String args[]) { 
+ 
+        int a[] = {6, 5, 12, 10, 9, 1}; 
+ 
+        int n = a.length; 
+ 
+        for (int gap = n / 2; gap > 0; gap = gap / 2) { 
+ 
+            for (int i = gap; i < n; i++) { 
+ 
+                int temp = a[i]; 
+                int j; 
+ 
+                for (j = i; j >= gap && a[j - gap] > temp; j -= gap) { 
+                    a[j] = a[j - gap]; 
+                } 
+ 
+                a[j] = temp; 
+            } 
+        } 
+ 
+        System.out.println("Sorted Array:"); 
+ 
+        for (int i = 0; i < n; i++) { 
+            System.out.print(a[i] + " "); 
+        } 
+    } 
+} 
+ 
+Output Sorted Array:  1 5 6 9 10 12 
+ 
+ 
+4. Stack 
+ 
+class Stack<T> { 
+    int top = -1; 
+    T stack[] = (T[]) new Object[5]; 
+ 
+    void push(T x) { 
+        if (top == 4) 
+            System.out.println("Stack Overflow"); 
+        else { 
+            stack[++top] = x; 
+            System.out.println(x + " pushed"); 
+        } 
+    } 
+ 
+    void pop() { 
+        if (top == -1) 
+            System.out.println("Stack Underflow"); 
+        else 
+            System.out.println(stack[top--] + " popped"); 
+    } 
+ 
+    void display() { 
+        if (top == -1) 
+            System.out.println("Stack is Empty"); 
+        else { 
+            System.out.println("Stack Elements:"); 
+            for (int i = top; i >= 0; i--) 
+                System.out.println(stack[i]); 
+        } 
+    } 
+} 
+ 
+class Main { 
+    public static void main(String args[]) { 
+ 
+        Stack<Integer> s = new Stack<Integer>(); 
+ 
+        s.push(10); 
+        s.push(20); 
+        s.push(30); 
+ 
+        s.display(); 
+ 
+        s.pop(); 
+ 
+        s.display(); 
+    } 
+} 
+Output: 
+10 pushed 
+20 pushed 
+30 pushed 
+Stack Elements: 
+30 
+20 
+10 
+30 popped 
+Stack Elements: 
+20 
+10 
+
+
+5. Queue 
+
+class Queue<T> { 
+int front = 0, rear = -1; 
+T q[] = (T[]) new Object[5]; 
+void enqueue(T x) { 
+if (rear == 4) 
+System.out.println("Queue Overflow"); 
+else { 
+q[++rear] = x; 
+System.out.println(x + " inserted"); 
+} 
+} 
+void dequeue() { 
+if (front > rear) 
+System.out.println("Queue Underflow"); 
+else 
+System.out.println(q[front++] + " deleted"); 
+} 
+void display() { 
+if (front > rear) 
+System.out.println("Queue is Empty"); 
+else { 
+System.out.println("Queue Elements:"); 
+for (int i = front; i <= rear; i++) 
+System.out.print(q[i] + " "); 
+System.out.println(); 
+} 
+} 
+} 
+class Main { 
+public static void main(String args[]) { 
+Queue<Integer> q = new Queue<Integer>(); 
+q.enqueue(10); 
+q.enqueue(20); 
+q.enqueue(30); 
+q.display(); 
+q.dequeue(); 
+q.display(); 
+} 
+} 
+
+Output: 
+10 inserted 
+20 inserted 
+30 inserted 
+Queue Elements: 
+10 20 30 
+10 deleted 
+Queue Elements: 
+20 30 
+
+
+6.  
+Develop a Java/Python program for the inorder and preorder 
+traversal of the following tree:  
+class Node { 
+char data; 
+Node left, right; 
+Node(char data) { 
+this.data = data; 
+left = right = null; 
+} 
+} 
+public class TreeTraversal { 
+// Inorder Traversal: Left, Root, Right 
+static void inorder(Node root) { 
+if (root != null) { 
+inorder(root.left); 
+System.out.print(root.data + " "); 
+inorder(root.right); 
+} 
+} 
+// Preorder Traversal: Root, Left, Right 
+static void preorder(Node root) { 
+if (root != null) { 
+System.out.print(root.data + " "); 
+preorder(root.left); 
+preorder(root.right); 
+} 
+} 
+public static void main(String[] args) { 
+// Creating the binary tree 
+Node root = new Node('A'); 
+root.left = new Node('B'); 
+root.right = new Node('C'); 
+root.left.left = new Node('D'); 
+root.right.left = new Node('E'); 
+root.right.right = new Node('F'); 
+root.right.left.right = new Node('G'); 
+root.right.right.left = new Node('H'); 
+root.right.right.right = new Node('I'); 
+System.out.println("Inorder Traversal:"); 
+inorder(root); 
+System.out.println("\nPreorder Traversal:"); 
+preorder(root); 
+} 
+} 
+
+Output: 
+Inorder Traversal: 
+D B A E G C H F I 
+Preorder Traversal: 
+A B D C E G F H I 
+
+
+7. BinaryTree 
+ 
+class BinaryTree { 
+ 
+    class Node { 
+        int data; 
+        Node left, right; 
+ 
+        Node(int x) { 
+            data = x; 
+            left = right = null; 
+        } 
+    } 
+ 
+    Node root; 
+ 
+    // Preorder Traversal 
+    void preorder(Node root) { 
+        if (root != null) { 
+            System.out.print(root.data + " "); 
+            preorder(root.left); 
+            preorder(root.right); 
+        } 
+    } 
+ 
+    // Inorder Traversal 
+    void inorder(Node root) { 
+        if (root != null) { 
+            inorder(root.left); 
+            System.out.print(root.data + " "); 
+            inorder(root.right); 
+        } 
+    } 
+ 
+    // Postorder Traversal 
+    void postorder(Node root) { 
+        if (root != null) { 
+            postorder(root.left); 
+            postorder(root.right); 
+            System.out.print(root.data + " "); 
+        } 
+    } 
+ 
+    public static void main(String args[]) { 
+ 
+        BinaryTree t = new BinaryTree(); 
+ 
+        // Creating Binary Tree 
+        t.root = t.new Node(1); 
+t.root.left = t.new Node(2); 
+t.root.right = t.new Node(3); 
+t.root.left.left = t.new Node(4); 
+t.root.left.right = t.new Node(5); 
+System.out.println("Preorder Traversal:"); 
+t.preorder(t.root); 
+System.out.println("\nInorder Traversal:"); 
+t.inorder(t.root); 
+System.out.println("\nPostorder Traversal:"); 
+t.postorder(t.root); 
+} 
+} 
+
+Output: 
+Preorder Traversal: 
+1 2 4 5 3 
+Inorder Traversal: 
+4 2 5 1 3 
+Postorder Traversal: 
+4 5 2 3 1 
+ 
